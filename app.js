@@ -33,7 +33,7 @@ new Vue({
             var damage = this.calculateDamage(10, 20);
             this.monsterHealth -= damage;
             this.turns.unshift({
-                isPlayer: false,
+                isPlayer: true,
                 text: ' player hit hard for ' + damage
         });
             if (this.checkWin()) {
@@ -50,7 +50,7 @@ new Vue({
                 this.playerHealth = 100;
             }
             this.turns.unshift({
-                isPlayer: false,
+                isHeal: true,
                 text: 'players heals for 10'
         }); 
             this.monsterAttacks();
@@ -69,7 +69,7 @@ new Vue({
             this.playerHealth -= damage;
             this.checkWin();
             this.turns.unshift({
-                isPlayer: false,
+                isMonster: true,
                 text: ' Monster hits player for ' + damage
         });
     },
