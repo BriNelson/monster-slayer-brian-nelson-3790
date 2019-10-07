@@ -6,7 +6,8 @@ new Vue({
     playerHealth: 100,
     monsterHealth: 100,
     gameIsRunning: false,
-    turns: []
+    turns: [],
+    specials: []
   },
 
   methods: {
@@ -15,9 +16,10 @@ new Vue({
       this.playerHealth = 100
       this.monsterHealth = 100
       this.turns = []
+      this.specials = []
     },
     attack: function () {
-      var damage = this.calculateDamage(10, 20)
+      var damage = this.calculateDamage(2, 10)
       this.monsterHealth -= damage
       this.turns.unshift({
         isPlayer: true,
@@ -28,11 +30,7 @@ new Vue({
         return
       }
       this.monsterAttacks()
-
-      if (this.turns.length >= 10) {
-        this.turns.splice(10, 13)
-        console.log(this.turns.length)
-      }
+      this.limitPrint()
     },
 
     specialAttack: function () {
@@ -46,6 +44,9 @@ new Vue({
         return
       }
       this.monsterAttacks()
+      this.limitPrint()
+      this.specials.push('Spatck', 'Spatck', 'Sptactk')
+      console.log(this.specials)
     },
 
     heal: function () {
@@ -59,6 +60,7 @@ new Vue({
         text: 'players heals for 10'
       })
       this.monsterAttacks()
+      this.limitPrint()
     },
 
     giveUp: function () {
@@ -76,6 +78,13 @@ new Vue({
     },
     calculateDamage: function (min, max) {
       return Math.max(Math.floor(Math.random() * max) + 1, min)
+    },
+
+    limitPrint: function () {
+      if (this.turns.length >= 10) {
+        this.turns.splice(10, 13)
+        console.log(this.turns.length)
+      }
     },
 
     checkWin: function () {
