@@ -11,7 +11,7 @@
 }
 
 .controls, .log {
-    margin-top: 30px;
+    
     text-align: center;
     padding: 10px;
     border: 1px solid #ccc;
@@ -49,6 +49,23 @@
     color: green;
     background-color: #aaffb0;
 }
+
+.spatck {
+    list-style: none;
+   
+}
+.spatck li{ 
+    width: 40px;
+    float: right;
+    margin-right: 1%;
+
+    
+}
+.spatck li img{
+    width: 100%;
+    display:inline-block;
+}
+    
 
 button {
     font-size: 20px;
