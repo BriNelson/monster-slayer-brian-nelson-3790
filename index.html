@@ -34,12 +34,35 @@
                     {{ monsterHealth }}
                 </div>
             </div>
+            
+                
+                </div>
 
-
-        </div>
+        
     </section>
+    
+    <section class="row">
+    <div class="small-6 columns">
+    <ul class="spatck">
+        <li v-for="spatks in spatk">
+            <img src="spatckimage.png" alt="">
+        </li>
+    </ul>
+</div>
+
+<div class="small-6 columns">
+    <ul class="spatck">
+        <li v-for="healings in healing">
+                <img src="public health.png" alt="">
+
+        </li>
+    </ul>
+</div>
+</section>
+   
 
     <section class="row controls" v-if="!gameIsRunning">
+        
         <div class="small-12 columns">
             <button id="start-game" @click="startGame">START NEW GAME</button>
         </div>

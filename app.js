@@ -7,7 +7,8 @@ new Vue({
     monsterHealth: 100,
     gameIsRunning: false,
     turns: [],
-    specials: []
+    spatk: [],
+    healing: []
   },
 
   methods: {
@@ -16,7 +17,8 @@ new Vue({
       this.playerHealth = 100
       this.monsterHealth = 100
       this.turns = []
-      this.specials = []
+      this.spatk = ['spk', 'spk', 'spk']
+      this.healing = ['heal', 'heal', 'heal']
     },
     attack: function () {
       var damage = this.calculateDamage(2, 10)
@@ -34,33 +36,41 @@ new Vue({
     },
 
     specialAttack: function () {
-      var damage = this.calculateDamage(10, 20)
-      this.monsterHealth -= damage
-      this.turns.unshift({
-        isPlayer: true,
-        text: ' player hit hard for ' + damage
-      })
-      if (this.checkWin()) {
-        return
+      if (this.spatk.length > 0) {
+        var damage = this.calculateDamage(10, 20)
+        this.monsterHealth -= damage
+        this.turns.unshift({
+          isPlayer: true,
+          text: ' player hit hard for ' + damage
+        })
+        if (this.checkWin()) {
+          return
+        }
+        this.monsterAttacks()
+        console.log(this.spatk)
+        this.spatk.pop()
+      } else {
+        alert('you have used all your special attacks')
       }
-      this.monsterAttacks()
-      this.limitPrint()
-      this.specials.push('Spatck', 'Spatck', 'Sptactk')
-      console.log(this.specials)
     },
 
     heal: function () {
-      if (this.playerHealth <= 90) {
-        this.playerHealth += 10
+      if (this.healing.length > 0) {
+        if (this.playerHealth <= 90) {
+          this.playerHealth += 10
+        } else {
+          this.playerHealth = 100
+        }
+        this.turns.unshift({
+          isHeal: true,
+          text: 'players heals for 10'
+        })
+        this.monsterAttacks()
+        console.log(this.healing)
+        this.healing.pop()
       } else {
-        this.playerHealth = 100
+        alert('you have used all your healling')
       }
-      this.turns.unshift({
-        isHeal: true,
-        text: 'players heals for 10'
-      })
-      this.monsterAttacks()
-      this.limitPrint()
     },
 
     giveUp: function () {
